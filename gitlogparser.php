@@ -4,9 +4,11 @@
 /**
  * Description of gitlogparser
  * 
+ * This script can be used to parse Git Log and get some useful info out of it
+ * 
  * @package Git-Log-Parser
  * @author Jamshad Ahmad
- * @version 1.0
+ * @version 2.0
  * 
  */
 class GitLogParser {
@@ -14,7 +16,7 @@ class GitLogParser {
     /**
      * @var string dir for path to the directory
      */
-    public $dir = "~/repos/Coeus-Tasks";//Default Path
+    public $dir = "~/repos/Coeus-Tasks";//Default Path if you don't give any,you can set yours
     
     
     /**
@@ -36,7 +38,10 @@ class GitLogParser {
      */
     public function Insights() {
         
-        //chdir($this->dir);
+        //chdir($this->dir); //this command gives warning sometimes
+        echo "Please enter the path of your local repository:\n";
+
+        $this->dir = trim(fread(STDIN, 80));
         
         $output = array();
         $U_Authors = array();
@@ -63,12 +68,24 @@ class GitLogParser {
             }
         }
         echo "\nTotal commits by all users :  $commit_count\n\n";
+        if($commit_count===0){
+            return;//No need to show contribution list
+        }
         echo "Here is the contributors list\n\n";
         foreach ($U_Authors as $value) {
-            echo "$value  || Commit Count: ".$this->occ_count($T_Authors, $value)."  ||  Contrib. : ".round(($this->occ_count($T_Authors, $value))*100/($commit_count),2)."%\n";
+            printf("%-33s  ",$value);
+            echo " || Commit Count: ";
+            printf("%3d",$this->occ_count($T_Authors, $value));
+            echo "  ||  Contrib. : ";
+            printf("%02.2f",($this->occ_count($T_Authors, $value))*100/($commit_count));
+            echo "%\n";
         }
-        echo "\n";
        
+        echo "\nEnter 'S' to show all commits or any other key to exit : ";
+        $c = fgetc(STDIN);
+        if($c==='s' || $c==='S'){
+            $this->dump();
+        }
     }
     /**
      * dump
@@ -82,6 +99,7 @@ class GitLogParser {
     function dump(){
         $output=array();
         exec("cd $this->dir; git log ",$output);
+        
         $history = array();
         foreach($output as $line){
             if(strpos($line, 'commit')===0){
@@ -103,6 +121,7 @@ class GitLogParser {
         }
 
         print_r($history);
+        echo "\n";
     }
     /**
      * is_in
@@ -141,5 +160,17 @@ class GitLogParser {
     
     
 }
+/**
+ * This code here will trigger Insights function of GitLogParser class
+ * <code>
+ * $obj=new GitLogParser();
+ * 
+ * $obj->Insights();
 
+ * </code> 
+ */
+
+$obj=new GitLogParser();
+
+$obj->Insights();
 ?>
