@@ -1,5 +1,5 @@
 <?php
-
+namespace Git_Log_Parser;
 
 /**
  * Description of gitlogparser
@@ -20,15 +20,6 @@ class GitLogParser {
     
     
     /**
-     * Constructor
-     * This constructor is to initilize path to local repository
-     */
-    
-    public function GitLogParser() {
-       
-    }
-    
-    /**
      * Insights
      *
      * This is the function which gets git log and parse it into some usefull insights.
@@ -36,7 +27,7 @@ class GitLogParser {
      * @param this function not receiving any parameter
      * @return this function is not returning anything
      */
-    public function Insights() {
+    public function showInsights() {
         
         //chdir($this->dir); //this command gives warning sometimes
         echo "Please enter the path of your local repository:\n";
@@ -59,7 +50,7 @@ class GitLogParser {
                     $tmp2 = explode("<", $tmp[1]);
                     $tmp2[0]= trim($tmp2[0]);
                     array_push($T_Authors, $tmp2[0]);
-                    if($this->is_in($U_Authors, $tmp2[0])===0){ //only if already not added
+                    if($this->isIn($U_Authors, $tmp2[0])===0){ //only if already not added
                         array_push($U_Authors, $tmp2[0]); //Here tmp2[0] contains email address
                     }
                     
@@ -75,16 +66,16 @@ class GitLogParser {
         foreach ($U_Authors as $value) {
             printf("%-33s  ",$value);
             echo " || Commit Count: ";
-            printf("%3d",$this->occ_count($T_Authors, $value));
+            printf("%3d",$this->occCount($T_Authors, $value));
             echo "  ||  Contrib. : ";
-            printf("%02.2f",($this->occ_count($T_Authors, $value))*100/($commit_count));
+            printf("%02.2f",($this->occCount($T_Authors, $value))*100/($commit_count));
             echo "%\n";
         }
        
         echo "\nEnter 'S' to show all commits or any other key to exit : ";
         $c = fgetc(STDIN);
         if($c==='s' || $c==='S'){
-            $this->dump();
+            $this->gitLog();
         }
     }
     /**
@@ -96,7 +87,7 @@ class GitLogParser {
      * @param this function not receiving any parameter
      * @return this function is not returning anything
      */
-    function dump(){
+    function gitLog(){
         $output=array();
         exec("cd $this->dir; git log ",$output);
         
@@ -131,7 +122,7 @@ class GitLogParser {
      * @param this function recieves $array and a $str which is a key to search.
      * @return this function returns either 1 or 0
      */
-    function is_in($array,$str){
+    function isIn($array,$str){
         
         foreach($array as $line){
             if($line==$str){
@@ -148,7 +139,7 @@ class GitLogParser {
      * @param this function recieves $array and a $str which is a key to search.
      * @return this function returns counted integer which is from 0 to integer limit.
      */
-    function occ_count($array,$str){
+    function occCount($array,$str){
         $count=0;
         foreach($array as $line){
             if($line==$str){
@@ -160,17 +151,5 @@ class GitLogParser {
     
     
 }
-/**
- * This code here will trigger Insights function of GitLogParser class
- * <code>
- * $obj=new GitLogParser();
- * 
- * $obj->Insights();
 
- * </code> 
- */
-
-$obj=new GitLogParser();
-
-$obj->Insights();
 ?>
