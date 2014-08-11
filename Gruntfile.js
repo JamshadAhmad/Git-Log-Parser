@@ -1,11 +1,5 @@
 'use strict';
 
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
-
 module.exports = function (grunt) {
     // show elapsed time at the end
     require('time-grunt')(grunt);
@@ -31,8 +25,26 @@ module.exports = function (grunt) {
                 bin: 'vendor/bin/phpmd',
                 rulesets: 'codesize'
                }
-           }    
+           },
+	 phpcpd: {
+	    application: {
+	      dir: '*.php'
+	    },
+	    options: {
+	      bin: 'vendor/bin/phpcpd',
+	      quiet: true
+	    }
+	  }
         ,
+	shell: {                                
+        listFolders: {                      // Target directory
+            options: {                     
+                stderr: false
+            },
+            command: 'php phpdcd.phar *.php' // to run php dcd through shell 
+        }
+    }
+	,
 	phpcs: {
     application: {
         dir: ['gitlogparser.php','gitlog.php']
@@ -40,8 +52,16 @@ module.exports = function (grunt) {
     options: {
        bin: 'vendor/bin/phpcs',
        standard: 'PSR1'
+   	 }
+	},
+	phpdocumentor: {
+    dist: {
+      options: {
+        directory : './',
+        target : 'docs'
+      }
     }
-	}
+  }
 
     });
 
@@ -50,8 +70,11 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('test', [
+	'phpdocumentor',	
 	'phpmd',
-	'phpcs'
+	'phpcs',
+	'phpcpd',
+	'shell'
     ]);
 
 };

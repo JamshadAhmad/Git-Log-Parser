@@ -8,4 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     $vendorDir . '/pdepend/pdepend/src/main/php',
     $vendorDir . '/phpmd/phpmd/src/main/php',
+    $vendorDir . '/phpunit/php-timer',
+    $vendorDir . '/phpunit/php-token-stream',
 );
