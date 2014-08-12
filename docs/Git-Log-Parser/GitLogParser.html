@@ -22,13 +22,14 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Description of gitlogparser  This script can be used to parse Git Log and get some useful info out of it</p>
+<p class="short-description">Git_Log_Parser can be used to extract extra info from git log.</p>
+<p class="description"><p>This script can be used to parse Git Log and get some useful info out of it.  It takes Git Log and extracts information about contributors and also  shows git log in  better format</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Jamshad Ahmad</li>
 				<li><span class="field">version:</span> 2.0</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_gitlogparser.php.html">/gitlogparser.php</a> (line <span class="field">13</span>)
+			Located in <a class="field" href="_gitlogparser.php.html">/gitlogparser.php</a> (line <span class="field">17</span>)
 		</p>
 		
 				
@@ -78,12 +79,12 @@
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">this</span>
+											<span class="method-result">bool</span>
 										<a href="#isIn" title="details" class="method-name">isIn</a>
 											(<span class="var-type">this</span>&nbsp;<span class="var-name">$array</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$str</span>)
 									</div>
 																<div class="method-definition">
-											<span class="method-result">this</span>
+											<span class="method-result">integer</span>
 										<a href="#occCount" title="details" class="method-name">occCount</a>
 											(<span class="var-type">this</span>&nbsp;<span class="var-name">$array</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$str</span>)
 									</div>
@@ -116,7 +117,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$dir</span>
-			 = <span class="var-default"> &quot;~/repos/Coeus-Tasks&quot;</span>			(line <span class="line-number">18</span>)
+			 = <span class="var-default"> &quot;~/repos/Coeus-Tasks&quot;</span>			(line <span class="line-number">23</span>)
 		</span>
 	</div>
 
@@ -151,12 +152,12 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">gitLog</span> (line <span class="line-number">84</span>)
+		<span class="method-title">gitLog</span> (line <span class="line-number">103</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">dump</p>
-<p class="description"><p>This will dump git log saperated by commits and with new format. I found it online  its original author is Ngo Minh Nam but now it is little edited</p></p>
+<p class="short-description">Shows git log in new format</p>
+<p class="description"><p>This will dump git log saperated by commits and with new format. I found it on  github. Its original author is Ngo Minh Nam but now it is little edited</p></p>
 	
 	<div class="method-signature">
 		<span class="method-result">void</span>
@@ -173,17 +174,18 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">isIn</span> (line <span class="line-number">117</span>)
+		<span class="method-title">isIn</span> (line <span class="line-number">146</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">isIn:This function searches a particular key from an array and returns 1 if it is present.</p>
+<p class="short-description">Returns true if element is in the container</p>
+<p class="description"><p>Searches a particular key from an array and returns 1 if it is present.</p></p>
 	<ul class="tags">
-				<li><span class="field">return:</span> function returns either 1 or 0</li>
+				<li><span class="field">return:</span> this function returns either 1 or 0.</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">this</span>
+		<span class="method-result">bool</span>
 		<span class="method-name">
 			isIn
 		</span>
@@ -205,18 +207,18 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">occCount</span> (line <span class="line-number">134</span>)
+		<span class="method-title">occCount</span> (line <span class="line-number">167</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">is_in</p>
+<p class="short-description">Returns count of occurences.</p>
 <p class="description"><p>This function searches a particular key from an array and returns its count.</p></p>
 	<ul class="tags">
-				<li><span class="field">return:</span> function returns counted integer which is from 0 to integer limit.</li>
+				<li><span class="field">return:</span> this function returns counted integer which is from 0 to integer limit.</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">this</span>
+		<span class="method-result">integer</span>
 		<span class="method-name">
 			occCount
 		</span>
@@ -238,11 +240,12 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">showInsights</span> (line <span class="line-number">26</span>)
+		<span class="method-title">showInsights</span> (line <span class="line-number">35</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Insights  This is the function which gets git log and parse it into some usefull insights.</p>
+<p class="short-description">Shows info about contributors</p>
+<p class="description"><p>This is the function which gets git log and parse it into some usefull insights.It uses  two other helper functions.</p></p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -264,7 +267,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 12 Aug 2014 13:13:58 +0500 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+		Documentation generated on Tue, 12 Aug 2014 16:30:26 +0500 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
 	</p>
 	</div></body>
 </html>

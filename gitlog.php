@@ -2,12 +2,11 @@
 namespace Git_Log_Parser;
 
 /**
- * Driver gitlogparser
- * This is driver code.This code here will trigger Insights function of GitLogParser class
- * <code>
- * $obj=new GitLogParser();
- * $obj->Insights();
- * </code> 
+ * Driver code for Git-Log-Parser class.
+ * 
+ * This is driver code.This code here will trigger Insights function of
+ * GitLogParser class.
+ * 
  */
 
 include 'gitlogparser.php';
