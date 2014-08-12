@@ -3,7 +3,6 @@ namespace Git_Log_Parser;
 
 /**
  * Description of gitlogparser
- * 
  * This script can be used to parse Git Log and get some useful info out of it
  * 
  * @package Git-Log-Parser
@@ -21,11 +20,8 @@ class GitLogParser {
     
     /**
      * Insights
-     *
      * This is the function which gets git log and parse it into some usefull insights.
      *
-     * @param this function not receiving any parameter
-     * @return this function is not returning anything
      */
     public function showInsights() {
         
@@ -84,8 +80,6 @@ class GitLogParser {
      * This will dump git log saperated by commits and with new format. I found it online 
      * its original author is Ngo Minh Nam but now it is little edited
      *
-     * @param this function not receiving any parameter
-     * @return this function is not returning anything
      */
     function gitLog(){
         $output=array();

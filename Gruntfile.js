@@ -31,11 +31,20 @@ module.exports = function (grunt) {
 	      dir: '*.php'
 	    },
 	    options: {
-	      bin: 'vendor/bin/phpcpd',
-	      quiet: true
+	      bin: 'vendor/bin/phpcpd'
 	    }
 	  }
         ,
+	phpdcd: {
+  	application: {
+     	dir: ['test']
+    	},
+    	options: {
+      		namesExclude: 'config.php,settings.php',
+		bin: 'vendor/bin/phpdcd'
+		}
+	},
+
 	shell: {                                
         listFolders: {                      // Target directory
             options: {                     
@@ -54,6 +63,7 @@ module.exports = function (grunt) {
        standard: 'PSR1'
    	 }
 	},
+
 	phpdocumentor: {
     dist: {
       options: {
@@ -74,7 +84,7 @@ module.exports = function (grunt) {
 	'phpmd',
 	'phpcs',
 	'phpcpd',
-	'shell'
+	'phpdcd'
     ]);
 
 };

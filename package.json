@@ -23,6 +23,7 @@
     "grunt-mkdir": "^0.1.2",
     "grunt-phpcpd": "^0.1.3",
     "grunt-phpcs": "^0.2.3",
+    "grunt-phpdcd": "^0.1.0",
     "grunt-phpdocumentor": "^0.4.1",
     "grunt-phplint": "0.0.5",
     "grunt-phpmd": "^0.1.0",
