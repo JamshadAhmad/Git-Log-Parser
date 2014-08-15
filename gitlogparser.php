@@ -13,15 +13,12 @@ namespace Git_Log_Parser;
  * @version 2.0
  * 
  */
-
 class GitLogParser
 {
-    
     /**
      * @var string dir for path to the directory
      */
-    public $dir = "~/repos/Coeus-Tasks";//Default Path if you don't give any,you can set yours
-    
+    public $dir;
     
     /**
      * Shows info about contributors
@@ -34,18 +31,15 @@ class GitLogParser
      */
     public function showInsights()
     {
-        
         //chdir($this->dir); //this command gives warning sometimes
-        echo "Please enter the path of your local repository:\n";
-
+        echo "Please enter the path of your local repository:";
+        echo "\n";
         $this->dir = trim(fread(STDIN, 80));
-        
         $output = array();
         $U_Authors = array();
         $T_Authors = array();
         $commit_count = 0;
         exec("cd $this->dir; git log ",$output);
-        
         foreach($output as $line)
         {
             if(strpos($line, 'Author')===0)
@@ -61,14 +55,13 @@ class GitLogParser
                     array_push($T_Authors, $tmp2[0]);
                     if($this->isIn($U_Authors, $tmp2[0])===0)
                     { //only if already not added
-                        array_push($U_Authors, $tmp2[0]); //Here tmp2[0] contains email address
+                        array_push($U_Authors, $tmp2[0]); //Here tmp2[0] contains name of committer
                     }
-                    
                 }
-                
             }
         }
-        echo "\nTotal commits by all users :  $commit_count\n\n";
+        echo "\nTotal commits by all users :  $commit_count";
+        echo "\n\n";
         if($commit_count===0)
         {
             return;//No need to show contribution list
@@ -90,7 +83,6 @@ class GitLogParser
             $this->gitLog();
         }
         */
-        
     }
     
     /**
@@ -100,11 +92,10 @@ class GitLogParser
      * github. Its original author is Ngo Minh Nam but now it is little edited
      *
      */
-    function gitLog()
+    public function gitLog()
     {
         $output=array();
         exec("cd $this->dir; git log ",$output);
-        
         $history = array();
         foreach($output as $line)
         {
@@ -130,7 +121,6 @@ class GitLogParser
                 $commit['Message']  .= $line;
             }
         }
-
         print_r($history);
         echo "\n";
     }
@@ -143,7 +133,7 @@ class GitLogParser
      * @param       this function recieves $array and a $str which is a key to search.
      * @return bool this function returns either 1 or 0.
      */
-    function isIn($array,$str)
+    protected function isIn($array,$str)
     {
         
         foreach($array as $line)
@@ -164,7 +154,7 @@ class GitLogParser
      * @param          this function recieves $array and a $str which is a key to search.
      * @return integer this function returns counted integer which is from 0 to integer limit.
      */
-    function occCount($array,$str)
+    protected occCount($array,$str)
     {
         $count=0;
         foreach($array as $line)
@@ -176,8 +166,4 @@ class GitLogParser
         }
         return $count;
     }
-    
-    
 }
-
-?>
