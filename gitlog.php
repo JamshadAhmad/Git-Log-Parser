@@ -8,11 +8,13 @@ namespace Git_Log_Parser;
  * GitLogParser class.
  * 
  */
-
+$arg =null;
+if($argc > 1)
+{
+    $arg=$argv[1];
+}
 include 'gitlogparser.php';
-
 $obj=new GitLogParser();
-
-$obj->showInsights();
-
+$obj->showInsights($arg);
 ?>
+

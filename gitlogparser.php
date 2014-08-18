@@ -29,12 +29,56 @@ class GitLogParser
      * @access public
      *
      */
-    public function showInsights()
+    public function showInsights($arg)
     {
-        //chdir($this->dir); //this command gives warning sometimes
-        echo "Please enter the path of your local repository:";
-        echo "\n";
-        $this->dir = trim(fread(STDIN, 80));
+        $force_show = false;
+        $path_provided = false;
+        if($arg!=null)
+        {
+            if($arg=="--help")
+            {
+                echo "You reached the help section of gitlog";
+                echo "\n\n";
+                echo "Running command without any argument will show Git Insights";
+                echo "\n";
+                echo "then it will ask for an input to show Git Log";
+                echo "\n\n";
+                echo "Running command with -s argument will show Git Log";
+                echo "\n";
+                echo "without asking for any additional input";
+                echo "\n";
+                echo "eg. :> php gitlog.php -s";
+                echo "\n\n";
+		echo "You can provide path infront of the command";
+		echo "\n";
+		echo "eg. :> php gitlog.php ~/path/to/your/repository";
+		echo "\n\n";
+                return;
+            }
+            else if($arg=="-s")
+            {
+                echo "Autoshow of Commit Log is Enabled";
+                echo "\n";
+                $force_show = true;
+            }
+            else if(strpos($arg, '/') !== false)
+            {
+                $path_provided = true;
+                $this->dir = trim($arg);
+            }
+            else
+            {
+                echo "$arg is Not a valid command argument, try --help";
+                echo "\n";
+                return;
+            }
+        }
+        if($path_provided==false)
+        {
+            echo "Please enter the path of your local repository:";
+            echo "\n";
+            $this->dir = trim(fread(STDIN, 80));
+        }
         $output = array();
         $U_Authors = array();
         $T_Authors = array();
@@ -76,10 +120,17 @@ class GitLogParser
             printf("%02.2f",($this->occCount($T_Authors, $value))*100/($commit_count));
             echo "%\n";
         }
-        echo "\nEnter 'S' to show all commits or any other key to exit : ";
-        $c = fgetc(STDIN);
-        if($c==='s' || $c==='S'){
+        if($force_show==true)
+        {
             $this->gitLog();
+        }
+        else
+        {
+            echo "\nEnter 'S' to show all commits or any other key to exit : ";
+            $c = fgetc(STDIN);
+            if($c==='s' || $c==='S'){
+                $this->gitLog();
+            }
         }
     }
     
