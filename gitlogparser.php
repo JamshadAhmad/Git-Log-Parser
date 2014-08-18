@@ -183,6 +183,7 @@ class GitLogParser
      * Searches a particular key from an array and returns 1 if it is present.
      *
      * @param  string recieves $array and a $str which is a key to search.
+     * 
      * @return bool   returns either 1 or 0.
      */
     protected function isIn($array,$str)
@@ -204,6 +205,7 @@ class GitLogParser
      * This function searches a particular key from an array and returns its count.
      *
      * @param  string  recieves $array and a $str which is a key to search.
+     * 
      * @return integer returns counted integer which is from 0 to integer limit.
      */
     protected function occCount($array,$str)
