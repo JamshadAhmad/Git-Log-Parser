@@ -76,13 +76,11 @@ class GitLogParser
             printf("%02.2f",($this->occCount($T_Authors, $value))*100/($commit_count));
             echo "%\n";
         }
-        /*//Uncomment this code to show git log with insights
         echo "\nEnter 'S' to show all commits or any other key to exit : ";
         $c = fgetc(STDIN);
         if($c==='s' || $c==='S'){
             $this->gitLog();
         }
-        */
     }
     
     /**
@@ -117,8 +115,11 @@ class GitLogParser
                 $commit['Date']   = substr($line, strlen('Date:'));
             }
             else
-            {		
-                $commit['Message']  .= $line;
+            {
+                if(strlen($line)>1)
+                {
+                    $commit['Message']  = $line;
+                }
             }
         }
         print_r($history);
@@ -130,8 +131,8 @@ class GitLogParser
      * 
      * Searches a particular key from an array and returns 1 if it is present.
      *
-     * @param       this function recieves $array and a $str which is a key to search.
-     * @return bool this function returns either 1 or 0.
+     * @param  string recieves $array and a $str which is a key to search.
+     * @return bool   returns either 1 or 0.
      */
     protected function isIn($array,$str)
     {
@@ -151,10 +152,10 @@ class GitLogParser
      *
      * This function searches a particular key from an array and returns its count.
      *
-     * @param          this function recieves $array and a $str which is a key to search.
-     * @return integer this function returns counted integer which is from 0 to integer limit.
+     * @param  string  recieves $array and a $str which is a key to search.
+     * @return integer returns counted integer which is from 0 to integer limit.
      */
-    protected occCount($array,$str)
+    protected function occCount($array,$str)
     {
         $count=0;
         foreach($array as $line)
