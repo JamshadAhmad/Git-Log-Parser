@@ -1,9 +1,17 @@
 {
+    "name": "Git-Log-Parser",
+    "description": "Shows valueable statistics from git log",
+    "type": "script"
+    "keywords": [
+	"git",
+	"log",
+	"parser"
+    ],
     "require-dev": {
         
         "phpmd/phpmd" : "2.0.*",
         "squizlabs/php_codesniffer": "1.*",
-	 "sebastian/phpcpd": "*",
+	"sebastian/phpcpd": "*",
 	"sebastian/phpdcd": "*"
     }
 }
